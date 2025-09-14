@@ -1,0 +1,999 @@
+#include <iostream>
+#include <fstream>
+#include <windows.h>
+void MainMenu(int Option) {
+    std::string Space90 = "                                                                                          \n";
+    std::string Space75 = "                                                                           \n";
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90 << Space90 << Space90;
+    std::cout << "       \xC9\xCD\xCD  \xBA\x20\x20  \xC9\xCD\xCD  \xC9\xCB\xBB  \xC9\xCD\xCD  \xC9\xCD\xBB  \xCD\xCB\xCD  \xC9\xCD\xBB  \xBA\x20\x20       \xC9\xCD\xBB  \xBA\x20\xBA  \xC9\xCD\xCD  \xC9\xCD\xCD  \xCD\xCB\xCD          \n";
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << "       \xCC\xCD\xCD  \xBA\x20\x20  \xCC\xCD\xCD  \xBA\xBA\xBA  \xCC\xCD\xCD  \xBA\x20\xBA  \x20\xBA\x20  \xBA\x20\xBA  \xBA\x20\x20       \xBA\x20\xBA  \xBA\x20\xBA  \xCC\xCD\xCD  \xC8\xCD\xBB  \x20\xBA\x20          \n";
+    std::cout << "       \xBA\x20\x20  \xBA\x20\x20  \xBA\x20\x20  \xBA\x20\xBA  \xBA\x20\x20  \xBA\x20\xBA  \x20\xBA\x20  \xCC\xCD\xB9  \xBA\x20\x20       \xBA\x20\xBA  \xBA\x20\xBA  \xBA\x20\x20  \x20\x20\xBA  \x20\xBA\x20          \n";
+    SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << "       \xC8\xCD\xCD  \xC8\xCD\xCD  \xC8\xCD\xCD  \xBA\x20\xBA  \xC8\xCD\xCD  \xBA\x20\xBA  \x20\xBA\x20  \xBA\x20\xBA  \xC8\xCD\xCD       \xC8\xCD\xCA  \xC8\xCD\xCA  \xC8\xCD\xCD  \xCD\xCD\xBC  \x20\xBA\x20          \n";
+    std::cout << Space90 << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90;
+    if (Option == 1)
+        std::cout << " > Start Game  " << Space75;
+    else
+        std::cout << "    Start Game " << Space75;
+    std::cout << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90;
+    if (Option == 2)
+        std::cout << " > Options     " << Space75;
+    else
+        std::cout << "    Options    " << Space75;
+    std::cout << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90;
+    if (Option == 3)
+        std::cout << " > Help        " << Space75;
+    else
+        std::cout << "    Help       " << Space75;
+    std::cout << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90 ;
+    if (Option == 4)
+        std::cout << " > Exit        " << Space75;
+    else
+        std::cout << "    Exit       " << Space75;
+    std::cout << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90 << Space90 << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90;
+}
+void Game (int Health, int Essence, int Pos, int mPos, int mHealth, int Level, double mCooldown) {
+    std::string Space90 = "                                                                                          \n";
+    std::string Space80 = "                                                                                \n";
+    std::string Space30 = "                              \n";
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+    std::cout << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90 << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_INTENSITY);
+    for (int a = 0; a < mPos; a++)
+        std::cout << ' ';
+    std::cout << '\xDB';
+    for (int a = 0; a < 89 - mPos; a++)
+        std::cout << ' ';
+    std::cout << '\n';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_GREEN);
+    for (int a = 0; a < mPos - 1; a++)
+        std::cout << ' ';
+    std::cout << "\xDC\xDB";
+    for (int a = 0; a < 89 - mPos; a++)
+        std::cout << ' ';
+    std::cout << '\n';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_RED);
+    for (int a = 0; a < Pos; a++)
+        std::cout << ' ';
+    std::cout << '\xDB';
+    for (int a = 0; a < 89 - Pos; a++)
+        std::cout << ' ';
+    std::cout << '\n';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_BLUE);
+    for (int a = 0; a < Pos - 1; a++)
+        std::cout << ' ';
+    std::cout << "\xDF\xDB\xDF";
+    for (int a = 0; a < 88 - Pos; a++)
+        std::cout << ' ';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_BLUE);
+    std::cout << '\n' << Space90;
+    std::cout << "Boss' Hit Cooldown: " << std::to_string(mCooldown);
+    for (int a = 0; a < 70 - std::to_string(mCooldown).length(); a++)
+        std::cout << ' ';
+    std::cout << '\n';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED);
+    std::cout << Space90 << Space90 << Space90;
+    std::cout << "       Your Health: ";
+    for (int a = 0; a < Health; a++)
+        std::cout << '\xDB';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    for (int a = 0; a < 50 - Health; a++)
+        std::cout << '\xDB';
+    std::cout << "                    ";
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED);
+    std::cout << "      Boss' Health: ";
+    for (int a = 0; a < mHealth; a++)
+        std::cout << '\xDB';
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    for (int a = 0; a < 50 - mHealth; a++)
+        std::cout << '\xDB';
+    std::cout << "                    ";
+    SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    std::cout << " \xDB\xDB\xDB\xDB\xDB    " << Space80;
+    switch (Essence) {
+    case 1:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED);
+        std::cout << " \xDB ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED);
+        std::cout << "\xDF\xDB\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 2:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << " \xDB ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDF\xDB\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 3:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN);
+        std::cout << " \xDB ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN);
+        std::cout << "\xDF\xDB\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 4:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        std::cout << " \xDB ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        std::cout << "\xDF\xDB\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 5:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+        std::cout << "\xDB  ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+        std::cout << "\xDF\xDF\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 6:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        std::cout << "\xDB  ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        std::cout << "\xDF\xDF\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 7:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN);
+        std::cout << "\xDB\xDB\xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN);
+        std::cout << "\xDB\xDB\xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 8:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        std::cout << "\xDB  ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        std::cout << "\xDF\xDF\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 9:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        std::cout << "\xDB  ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        std::cout << "\xDF\xDF\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    case 0:
+        std::cout << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        std::cout << "\xDB  ";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80 << " \xDB";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        std::cout << "\xDF\xDF\xDF";
+        SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        std::cout << "\xDB    " << Space80;
+        break;
+    }
+    std::cout << " \xDB\xDB\xDB\xDB\xDB    Level: " << Level;
+    for (int a = 0; a < 73 - std::to_string(Level).length(); a++)
+        std::cout << ' ';
+    std::cout << Space90;
+}
+void Settings (int SelectedX, int SelectedY, int TimeSpeedrun) {
+    std::string Space90 = "                                                                                          \n";
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    std::cout << Space90 << Space90;
+    for (int a = 0; a < 41; a++)
+        std::cout << '~';
+    std::cout << "SETTINGS";
+    for (int a = 0; a < 41; a++)
+        std::cout << '~';
+    std::cout << '\n';
+    std::cout << Space90 << Space90;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    if (SelectedY == 1) {
+        switch (SelectedX) {
+        case 1:
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Speedrun with Time ";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED);
+            std::cout << "[ Most Levels in " << TimeSpeedrun << " minutes ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << "\n                               [ Least time to get to level " << TimeSpeedrun << " ]\n                               [ None ]\n" << Space90 << Space90;
+            SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Save level into computer [ YES ]\n                                    [ NO ]\n" << Space90 << Space90;
+            break;
+        case 2:
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Speedrun with Time [ Most Levels in " << TimeSpeedrun << " minutes ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED);
+            std::cout << "\n                               [ Least time to get to level " << TimeSpeedrun << " ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << "\n                               [ None ]\n" << Space90 << Space90;
+            SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Save level into computer [ YES ]\n                                    [ NO ]\n" << Space90 << Space90;
+            break;
+        case 3:
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Speedrun with Time [ Most Levels in " << TimeSpeedrun << " minutes ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << "\n                               [ Least time to get to level " << TimeSpeedrun << " ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED);
+            std::cout << "\n                               [ None ]\n" << Space90 << Space90;
+            SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Save level into computer [ YES ]\n                                    [ NO ]\n" << Space90 << Space90;
+            break;
+        }
+    } else if (SelectedY == 2) {
+        switch (SelectedX) {
+        case 1:
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Speedrun with Time [ Most Levels in " << TimeSpeedrun << " minutes ]\n                               [ Least time to get to level " << TimeSpeedrun << " ]\n                               [ None ]\n" << Space90 << Space90;
+            SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Save level into computer ";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | FOREGROUND_RED);
+            std::cout << "[ YES ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << "\n                                    [ NO ]\n" << Space90 << Space90;
+            break;
+        case 2:
+            SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Speedrun with Time [ Most Levels in " << TimeSpeedrun << " minutes ]\n                               [ Least time to get to level " << TimeSpeedrun << " ]\n                               [ None ]\n" << Space90 << Space90;
+            SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            std::cout << Space90 << Space90 << "          > Save level into computer [ YES ]";
+            SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | FOREGROUND_RED);
+            std::cout << "\n                                    [ NO ]\n" << Space90 << Space90;
+            break;
+        }
+    }
+    for (int a = 0; a < 12; a++) {
+        std::cout << Space90;
+    }
+}
+void Help (int Slide) {
+    std::string Space90 = "                                                                                          \n";
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+    switch (Slide) {
+    case 0:
+        std::cout << Space90 << Space90;
+        std::cout << "                                           HELP                                           \n";
+        std::cout << Space90 << Space90 << Space90 << Space90;
+        std::cout << "          ";
+        for (int a = 0; a < 70; a++)
+            std::cout << '\xDB';
+        std::cout << "          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     ------------------------TUTORIAL------------------------       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     There are as many levels as you want, but there are some       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     That are very hard and maybe impossible. To pass a level       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     You need a lot of strategy, and also a lot of clicks           ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     because according to your weapon you can take a boss'          ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     health lower, your health lower, duplicate or even             ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     triplicate a boss' hit cooldown. You have 50 health and        ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     the boss has less health* until level 100 where it will        ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     have the same amount of health as you. To hit you press        ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     a left mouse click, and to eat and higher your health,         ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     you press a right mouse click. To choose a weapon you          ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     select 0-9 with the number key of the weapon which will        ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     be explained in next slide.                                    ";
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          ";
+        for (int a = 0; a < 70; a++)
+            std::cout << '\xDB';
+        std::cout << "          \n";
+        std::cout << Space90 << Space90 << Space90;
+        break;
+    case 1:
+        std::cout << Space90 << Space90;
+        std::cout << "                                           HELP                                           \n";
+        std::cout << Space90 << Space90 << Space90 << Space90;
+        std::cout << "          ";
+        for (int a = 0; a < 70; a++)
+            std::cout << '\xDB';
+        std::cout << "          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     ------------------------TUTORIAL------------------------       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     NAME      |P. HEALTH |B. HEALTH |COOLDOWN  |HEALTH IN EATING|#|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     FIRE      | -3       | -3       | 3x 90%   | -5             |1|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     WATER     | NONE     | -2       | 2x 80%   | +3             |2|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     EARTH     | -1       | -3       | 1x 100%  | +2             |3|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     AIR       | NONE     | -1       | 1x 100%  | +1             |4|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     LIGHTNING | -3       | -4       | 3x ~85%  | -4             |5|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     ICE       | NONE     | -2       | 2x 90%   | +2             |6|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     SHADOW    | -2       | -3       | 1x 100%  | -3             |7|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     LIGHT     | NONE     | -4       | 3x 95%   | +4             |8|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     POISON    | -1       | -3       | 3x 90%   | -6             |9|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     METAL     | NONE     | -3       | 2x ~85%  | +1             |0|";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     The ~85% is exactly 5 in 6 chance                              ";
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          ";
+        for (int a = 0; a < 70; a++)
+            std::cout << '\xDB';
+        std::cout << "          \n";
+        std::cout << Space90 << Space90 << Space90;
+        break;
+    case 2:
+        std::cout << Space90 << Space90;
+        std::cout << "                                           HELP                                           \n";
+        std::cout << Space90 << Space90 << Space90 << Space90;
+        std::cout << "          ";
+        for (int a = 0; a < 70; a++)
+            std::cout << '\xDB';
+        std::cout << "          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     ------------------------TUTORIAL------------------------       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     CAUTION: THIS PART IS NERDY, IF YOU DON'T WANT TO SEE, JUST    ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     PRESS  'ESCAPE' KEY. THANK YOU                                 ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     MONSTER DAMAGE = LEVEL / 2                                     ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     MONSTER HEALTH = LEVEL                                         ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     MONSTER HITBOX = LEVEL / ((2 * (LEVEL % 2)) + 2)               ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     MONSTER COOLDOWN = 10.0f / (LEVEL * 2)                         ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     MONSTER COOLDOWN 2 = 20.0f / (Level * 2)                       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     MONSTER COOLDOWN 3 = 30.0f / (Level * 2)                       ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     ALL THE THINGS EXPLAINED ABOVE COME DIRECTLY FROM SOURCE CODE  ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     TAB: MainMenu Movement. A/D: Game & Help Movement. W/A/S/D:    ";
+        std::cout << "\xDB          \n          \xDB";
+        std::cout << "     Settings Movement.                                             ";
+        std::cout << "\xDB          \n          \xDB";
+        int FunFactID = rand() % 8;
+        if (FunFactID == 0)
+            std::cout << "     FUN FACT: The Save is saved on a file called \"Saved.txt\"       ";
+        else if (FunFactID == 1)
+            std::cout << "     FUN FACT: This game is written in programming language C++     ";
+        else if (FunFactID == 2)
+            std::cout << "     FUN FACT: There are 5 fun facts have the same amount of words  ";
+        else if (FunFactID == 3)
+            std::cout << "     FUN FACT: The alpha version of this game was built 3/11/2024   ";
+        else if (FunFactID == 4)
+            std::cout << "     FUN FACT: As of 8/11/2024, this game has 1000 lines of code    ";
+        else if (FunFactID == 5)
+            std::cout << "     FUN FACT: The game visuals lag when level 51 reached           ";
+        else if (FunFactID == 6)
+            std::cout << "     FUN FACT: There are 9 fun facts in total, counting this one    ";
+        else
+            std::cout << "     FUN FACT: This is one of the 5 messages with 8 words           ";
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          \xDB";
+        for (int a = 0; a < 68; a++)
+            std::cout << ' ';
+        std::cout << "\xDB          \n          ";
+        for (int a = 0; a < 70; a++)
+            std::cout << '\xDB';
+        std::cout << "          \n";
+        std::cout << Space90 << Space90 << Space90;
+        break;
+    }
+}
+int main () {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
+    SetConsoleTitle("Elemental Quest Alpha 1.4");
+    int t = MessageBox(0, "It's recommended not to resize this app and not to click on it. Do you want to continue?", "Warning", MB_YESNO);
+    if (t == IDNO)
+        return 0;
+    t = MessageBox(0, "Credits to:\ndgt2023", "Credits", MB_OK);
+    system("mode con cols=90 lines=30");
+    int ScreenID = 0;
+    int Selected = 1;
+    int PlayerPos = 20;
+    int PlayerItem = 1;
+    int PlayerHealth = 50;
+    int MonsterPos = 45;
+    int Level = 1;
+    int MonsterHitBox = Level / ((2 * (Level % 2)) + 2);
+    int MonsterDamage = Level / 2;
+    int MonsterHealth = Level;
+    double MainTime = 10.0f / (Level * 2);
+    double TimeoutTime = 20.0f / (Level * 2);
+    double TimeoutBTime = 30.0f / (Level * 2);
+    bool RefreshScreen = true;
+    bool LevelAdv = false;
+    bool Timeout = false;
+    bool TimeoutB = false;
+    int LastHit = GetTickCount();
+    int SpeedTime = 1;
+    int SelectedX = 1;
+    int SpeedType = 3;
+    int StartingTick;
+    bool isSaved;
+    while (true)  {
+        if (RefreshScreen){
+            RefreshScreen = false;
+            system("cls");
+            switch (ScreenID) {
+            case 0:
+                MainMenu(Selected);
+                break;
+            case 1:
+                Game(PlayerHealth, PlayerItem, PlayerPos, MonsterPos, MonsterHealth, Level, MainTime);
+                StartingTick = GetTickCount();
+                break;
+            case 2:
+                Settings(SelectedX, Selected, SpeedTime);
+                break;
+            case 3:
+                Help(Selected);
+                break;
+            }
+        }
+        switch (ScreenID) {
+        case 0:
+            if (GetAsyncKeyState(VK_TAB) & 0b1) {
+                Selected++;
+                if (Selected == 5)
+                    Selected = 1;
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState(VK_RETURN) & 0b1) {
+                switch (Selected) {
+                case 1:
+                    ScreenID = 1;
+                    RefreshScreen = true;
+                    t = MessageBox(0, "You got the fire weapon for free!\nPlayer Damage: 3\nBoss Damage: 3\nBoss' Cooldown: 3s with 90%\n-5HP when eaten", "Message", MB_OK);
+                    break;
+                case 2:
+                    ScreenID = 2;
+                    RefreshScreen = true;
+                    break;
+                case 3:
+                    ScreenID = 3;
+                    Selected = 0;
+                    RefreshScreen = true;
+                    break;
+                case 4:
+                    if (isSaved && SpeedType == 3) {
+                        std::ofstream save;
+                        save.open("save.txt");
+                        save << Level;
+                    }
+                    return 0;
+                    break;
+                }
+            }
+            break;
+        case 1:
+            if (GetAsyncKeyState('A') & 0b1) {
+                PlayerPos--;
+                if (PlayerPos == 0)
+                    PlayerPos = 13;
+                else
+                    RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('D') & 0b1) {
+                PlayerPos++;
+                if (PlayerPos == 89)
+                    PlayerPos = 88;
+                else
+                    RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('S') & 0b1) {
+                if (TimeoutB) {
+                    if (LastHit + TimeoutBTime * 1000 < GetTickCount())
+                        PlayerHealth += MonsterDamage;
+                } else if (Timeout) {
+                    if (LastHit + TimeoutTime * 1000 < GetTickCount())
+                        PlayerHealth += MonsterDamage;
+                } else {
+                    if (LastHit + MainTime < GetTickCount())
+                        PlayerHealth += MonsterDamage;
+                }
+            }
+            if (GetAsyncKeyState('1') & 0b1) {
+                PlayerItem = 1;
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('2') & 0b1) {
+                if (Level >= 3) {
+                    PlayerItem = 2;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('3') & 0b1) {
+                if (Level >= 5) {
+                    PlayerItem = 3;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('4') & 0b1) {
+                if (Level >= 8) {
+                    PlayerItem = 4;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('5') & 0b1) {
+                if (Level >= 10) {
+                    PlayerItem = 5;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('6') & 0b1) {
+                if (Level >= 13) {
+                    PlayerItem = 6;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('7') & 0b1) {
+                if (Level >= 15) {
+                    PlayerItem = 7;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('8') & 0b1) {
+                if (Level >= 18) {
+                    PlayerItem = 8;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('9') & 0b1) {
+                if (Level >= 20) {
+                    PlayerItem = 9;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState('0') & 0b1) {
+                if (Level >= 25) {
+                    PlayerItem = 0;
+                    RefreshScreen = true;
+                }
+            }
+            if (GetAsyncKeyState(VK_RBUTTON) & 0b1) {
+                switch (PlayerItem) {
+                case 1:
+                    PlayerHealth -= 5;
+                    break;
+                case 2:
+                    PlayerHealth += 3;
+                    break;
+                case 3:
+                    PlayerHealth += 2;
+                    break;
+                case 4:
+                    PlayerHealth += 1;
+                    break;
+                case 5:
+                    PlayerHealth -= 4;
+                    break;
+                case 6:
+                    PlayerHealth += 2;
+                    break;
+                case 7:
+                    PlayerHealth -= 3;
+                    break;
+                case 8:
+                    PlayerHealth += 4;
+                    break;
+                case 9:
+                    PlayerHealth -= 6;
+                    break;
+                case 0:
+                    PlayerHealth += 1;
+                    break;
+                }
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState(VK_LBUTTON) & 0b1) {
+                if (PlayerPos <= MonsterPos + MonsterHitBox + 1 && PlayerPos >= MonsterPos - MonsterHitBox) {
+                    switch (PlayerItem) {
+                    case 1:
+                        if (!!(rand() % 10)) {
+                            TimeoutB = true;
+                            LastHit = GetTickCount();
+                        }
+                        PlayerHealth -= 3;
+                        MonsterHealth -= 3;
+                        break;
+                    case 2:
+                        if (!!(rand() % 5)) {
+                            Timeout = true;
+                            LastHit = GetTickCount();
+                        }
+                        MonsterHealth -= 2;
+                        break;
+                    case 3:
+                        PlayerHealth -= 1;
+                        MonsterHealth -= 3;
+                        break;
+                    case 4:
+                        MonsterHealth -= 1;
+                        break;
+                    case 5:
+                        if (!!(rand() % 6)) {
+                            TimeoutB = true;
+                            LastHit = GetTickCount();
+                        }
+                        PlayerHealth -= 3;
+                        MonsterHealth -= 4;
+                        break;
+                    case 6:
+                        if (!!(rand() % 6)) {
+                            Timeout = true;
+                            LastHit = GetTickCount();
+                        }
+                        MonsterHealth -= 2;
+                        break;
+                    case 7:
+                        PlayerHealth -= 2;
+                        MonsterHealth -= 3;
+                        break;
+                    case 8:
+                        if (!!(rand() % 20)) {
+                            TimeoutB = true;
+                            LastHit = GetTickCount();
+                        }
+                        MonsterHealth -= 4;
+                        break;
+                    case 9:
+                        if (!!(rand() % 10)) {
+                            TimeoutB = true;
+                            LastHit = GetTickCount();
+                        }
+                        PlayerHealth -= 3;
+                        MonsterHealth -= 1;
+                        break;
+                    case 0:
+                        if (!!(rand() % 6)) {
+                            Timeout = true;
+                            LastHit = GetTickCount();
+                        }
+                        MonsterHealth -= 3;
+                        break;
+                    }
+                    RefreshScreen = true;
+                }
+            }
+            if (MonsterHealth <= 0) {
+                Level++;
+                MonsterHitBox = Level / ((2 * (Level % 2)) * 2 + 2);
+                MonsterDamage = Level / 2;
+                MonsterHealth = Level;
+                MainTime = 10 / (Level * 2);
+                TimeoutTime = 20 / (Level * 2);
+                TimeoutBTime = 30 / (Level * 2);
+                PlayerPos = 20;
+                PlayerHealth = 50;
+                std::string output = "Congratulations!. You Won, Passing to level ";
+                output += std::to_string(Level);
+                t = MessageBox(0, output.c_str(), "Message", MB_OK);
+                RefreshScreen = true;
+                TimeoutB = false;
+                Timeout = false;
+                switch (Level) {
+                case 3:
+                    t = MessageBox(0, "You got the water weapon for reaching level 3\nPlayer Damage: 0\nBoss Damage: 2\nBoss' Cooldown: 2s with 80%\n+3HP when eaten", "Message", MB_OK);
+                    break;
+                case 5:
+                    t = MessageBox(0, "You got the earth weapon for reaching level 5\nPlayer Damage: 1\nBoss Damage: 3\nBoss' Cooldown: 1s with 100%\n+2HP when eaten", "Message", MB_OK);
+                    break;
+                case 8:
+                    t = MessageBox(0, "You got the air weapon for reaching level 8\nPlayer Damage: 0\nBoss Damage: 1\nBoss' Cooldown: 1s with 100%\n+1HP when eaten", "Message", MB_OK);
+                    break;
+                case 10:
+                    t = MessageBox(0, "You got the lightning weapon for reaching level 10\nPlayer Damage: 3\nBoss Damage: 4\nBoss' Cooldown: 3s with ~85%\n-4HP when eaten", "Message", MB_OK);
+                    break;
+                case 13:
+                    t = MessageBox(0, "You got the ice weapon for reaching level 13\nPlayer Damage: 2\nBoss Damage: 2\nBoss' Cooldown: 2s with 90%\n+2HP when eaten", "Message", MB_OK);
+                    break;
+                case 15:
+                    t = MessageBox(0, "You got the shadow weapon for reaching level 15\nPlayer Damage: 2\nBoss Damage: 3\nBoss' Cooldown: 1s with 100%\n-3HP when eaten", "Message", MB_OK);
+                    break;
+                case 18:
+                    t = MessageBox(0, "You got the light weapon for reaching level 18\nPlayer Damage: 0\nBoss Damage: 4\nBoss' Cooldown: 3s with 95%\n+4HP when eaten", "Message", MB_OK);
+                    break;
+                case 20:
+                    t = MessageBox(0, "You got the poison weapon for reaching level 20\nPlayer Damage: 1\nBoss Damage: 3\nBoss' Cooldown: 3s with 90%\n-6HP when eaten", "Message", MB_OK);
+                    break;
+                case 25:
+                    t = MessageBox(0, "You got the metal weapon for reaching level 25\nPlayer Damage: 0\nBoss Damage: 3\nBoss' Cooldown: 2s with ~85%\n+1HP when eaten", "Message", MB_OK);
+                    break;
+                }
+            }
+            if (PlayerHealth <= 0) {
+                Level = 1;
+                MonsterHitBox = Level / ((2 * (Level % 2)) * 2 + 2);
+                MonsterDamage = Level / 2;
+                MonsterHealth = Level;
+                MainTime == 10 / (Level * 2);
+                TimeoutTime == 20 / (Level * 2);
+                TimeoutBTime == 30 / (Level * 2);
+                PlayerPos = 20;
+                PlayerHealth = 50;
+                t = MessageBox(0, "Sorry!. You lost, Going back to level 1", "Message", MB_OK);
+                RefreshScreen = true;
+                TimeoutB = false;
+                Timeout = false;
+            }
+            if (PlayerPos <= MonsterPos + MonsterHitBox + 1 && PlayerPos >= MonsterPos - MonsterHitBox) {
+                if (TimeoutB) {
+                    if (LastHit + TimeoutBTime * 1000 < GetTickCount()) {
+                        TimeoutB = false;
+                        PlayerHealth -= MonsterDamage;
+                        if (MonsterDamage != 0)
+                            RefreshScreen = true;
+                        LastHit = GetTickCount();
+                    }
+                } else if (Timeout) {
+                    if (LastHit + TimeoutTime * 1000 < GetTickCount()) {
+                        Timeout = false;
+                        PlayerHealth -= MonsterDamage;
+                        if (MonsterDamage != 0)
+                            RefreshScreen = true;
+                        LastHit = GetTickCount();
+                    }
+                } else {
+                    if (LastHit + MainTime * 1000 < GetTickCount()) {
+                        PlayerHealth -= MonsterDamage;
+                        if (MonsterDamage != 0)
+                            RefreshScreen = true;
+                        LastHit = GetTickCount();
+                    }
+                }
+            }
+            if (SpeedType == 1) {
+                if (GetTickCount() - StartingTick > SpeedTime * 60000) {
+                    MonsterHitBox = Level / ((2 * (Level % 2)) * 2 + 2);
+                    MonsterDamage = Level / 2;
+                    MonsterHealth = Level;
+                    MainTime == 10 / (Level * 2);
+                    TimeoutTime == 20 / (Level * 2);
+                    TimeoutBTime == 30 / (Level * 2);
+                    PlayerPos = 20;
+                    PlayerHealth = 50;
+                    std::string output = "Your speedrun has finished, Your score in ";
+                    output += std::to_string(SpeedTime);
+                    output += " minutes was ";
+                    output += std::to_string(Level);
+                    t = MessageBox(0, output.c_str(), "Message", MB_OK);
+                    Level = 1;
+                    RefreshScreen = true;
+                    TimeoutB = false;
+                    Timeout = false;
+                }
+            }
+            if (SpeedType == 2) {
+                if (Level == SpeedTime) {
+                    MonsterHitBox = Level / ((2 * (Level % 2)) * 2 + 2);
+                    MonsterDamage = Level / 2;
+                    MonsterHealth = Level;
+                    MainTime == 10 / (Level * 2);
+                    TimeoutTime == 20 / (Level * 2);
+                    TimeoutBTime == 30 / (Level * 2);
+                    PlayerPos = 20;
+                    PlayerHealth = 50;
+                    std::string output = "Your speedrun has finished, Your time to get to level ";
+                    output += std::to_string(SpeedTime);
+                    output += " was ";
+                    output += std::to_string(GetTickCount() - StartingTick);
+                    t = MessageBox(0, output.c_str(), "Message", MB_OK);
+                    Level = 1;
+                    RefreshScreen = true;
+                    TimeoutB = false;
+                    Timeout = false;
+                }
+            }
+            break;
+        case 2:
+            if (GetAsyncKeyState('W') & 0b1) {
+                Selected += 1;
+                if (Selected == 3)
+                    Selected = 1;
+                if (Selected == 2) {
+                    if (SelectedX == 3)
+                        SelectedX = 2;
+                }
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('S') & 0b1) {
+                Selected -= 1;
+                if (Selected == 0)
+                    Selected = 2;
+                if (Selected == 2) {
+                    if (SelectedX == 3)
+                        SelectedX = 2;
+                }
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('A') & 0b1) {
+                SelectedX -= 1;
+                if (Selected == 1) {
+                    SpeedType = SelectedX;
+                    if (SelectedX == 0)
+                        SelectedX = 3;
+                } else {
+                    if (SelectedX == 0)
+                        SelectedX = 2;
+                    if (SelectedX == 1)
+                        isSaved = true;
+                    else
+                        isSaved = false;
+                }
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('D') & 0b1) {
+                SelectedX += 1;
+                if (Selected == 1) {
+                    SpeedType = SelectedX;
+                    if (SelectedX >= 4)
+                        SelectedX = 1;
+                } else {
+                    if (SelectedX >= 3)
+                        SelectedX = 1;
+                    if (SelectedX == 1)
+                        isSaved = true;
+                    else
+                        isSaved = false;
+                }
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('+') & 0b1) {
+                SpeedTime += 1;
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('-') & 0b1) {
+                SpeedTime -= 1;
+                if (SpeedTime == 0)
+                    SpeedTime = 1;
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState(VK_ESCAPE) & 0b1) {
+                ScreenID = 0;
+                Selected = 1;
+                RefreshScreen = true;
+                if (isSaved) {
+                    std::ifstream save;
+                    save.open("Save.txt");
+                    save >> Level;
+                }
+            }
+            break;
+        case 3:
+            if (GetAsyncKeyState('A') & 0b1) {
+                Selected -= 1;
+                if (Selected == -1)
+                    Selected = 2;
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState('D') & 0b1) {
+                Selected += 1;
+                if (Selected == 3)
+                    Selected = 0;
+                RefreshScreen = true;
+            }
+            if (GetAsyncKeyState(VK_ESCAPE)) {
+                ScreenID = 0;
+                Selected = 1;
+                RefreshScreen = true;
+            }
+        }
+    }
+    if (isSaved && SpeedType == 3) {
+        std::ofstream save;
+        save.open("Save.txt");
+        save << Level;
+    }
+    return 0;
+}
